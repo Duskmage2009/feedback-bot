@@ -3,7 +3,11 @@ package com.autoservice.feedbackbot.repository;
 import com.autoservice.feedbackbot.entity.Feedback;
 import com.autoservice.feedbackbot.enums.Position;
 import com.autoservice.feedbackbot.enums.Sentiment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
+public interface FeedbackRepository extends JpaRepository<Feedback, Long> , JpaSpecificationExecutor<Feedback> {
 
     List<Feedback> findByUserBranch(String branch);
 

@@ -78,7 +78,6 @@ public class OpenAiService {
 
     private AnalysisResult parseResponse(String response) {
         try {
-            // Extract JSON from response if it contains additional text
             String jsonPart = extractJsonFromResponse(response);
             JsonNode json = objectMapper.readTree(jsonPart);
 
@@ -96,7 +95,6 @@ public class OpenAiService {
     }
 
     private String extractJsonFromResponse(String response) {
-        // Find JSON part in the response
         int startIndex = response.indexOf("{");
         int endIndex = response.lastIndexOf("}");
 

@@ -51,13 +51,11 @@ public class TrelloService {
         params.add("desc", cardDescription);
         params.add("pos", "top");
 
-        // Set labels based on criticality and sentiment
         String labelIds = determineLabelIds(feedback);
         if (labelIds != null) {
             params.add("idLabels", labelIds);
         }
 
-        // Set due date (3 days from now for critical issues)
         params.add("due", java.time.LocalDateTime.now().plusDays(3).toString());
 
         HttpHeaders headers = new HttpHeaders();
@@ -107,8 +105,6 @@ public class TrelloService {
     }
 
     private String determineLabelIds(Feedback feedback) {
-        // This would typically map to actual Trello label IDs in your board
-        // For now, returning null - you would configure these based on your Trello board setup
         return null;
     }
 }

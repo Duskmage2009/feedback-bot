@@ -20,7 +20,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -137,10 +136,8 @@ public class TelegramBotService extends TelegramLongPollingBot {
             return;
         }
 
-        // Analyze feedback with OpenAI
         AnalysisResult analysis = openAiService.analyzeFeedback(messageText);
 
-        // Save to database
         Feedback feedback = new Feedback();
         feedback.setUser(user);
         feedback.setMessage(messageText);
@@ -150,14 +147,12 @@ public class TelegramBotService extends TelegramLongPollingBot {
 
         feedback = feedbackRepository.save(feedback);
 
-        // Save to Google Docs
         try {
-            googleDocsService.addFeedbackToDoc(feedback);
+               googleDocsService.addFeedbackToDoc(feedback);
         } catch (Exception e) {
             log.error("Failed to save to Google Docs: {}", e.getMessage());
         }
 
-        // Create Trello card for critical feedback
         if (feedback.getCriticalityLevel() >= 4) {
             try {
                 String cardId = trelloService.createCriticalFeedbackCard(feedback);
@@ -168,7 +163,6 @@ public class TelegramBotService extends TelegramLongPollingBot {
             }
         }
 
-        // Send confirmation
         String responseMessage = String.format(
                 "Thank you for your feedback! ✅\n\n" +
                         "Analysis:\n" +

@@ -41,7 +41,7 @@ public class GoogleDocsService {
 
     private Docs docsService;
 
-    @PostConstruct
+   @PostConstruct
     public void init() throws GeneralSecurityException, IOException {
         NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 
@@ -59,15 +59,13 @@ public class GoogleDocsService {
 
         List<Request> requests = new ArrayList<>();
 
-        // Add the feedback text at the end of the document
         requests.add(new Request()
                 .setInsertText(new InsertTextRequest()
                         .setText(feedbackText)
-                        .setLocation(new Location().setIndex(1)) // Insert at the beginning
+                        .setLocation(new Location().setIndex(1))
                 )
         );
 
-        // Apply formatting
         requests.add(new Request()
                 .setUpdateTextStyle(new UpdateTextStyleRequest()
                         .setRange(new Range()
