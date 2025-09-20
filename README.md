@@ -82,14 +82,8 @@ mvn clean compile
 
 # Run
 mvn spring-boot:run
-# 8. Docker Setup (Alternative)
-# Build image
 
-docker build -t feedback-bot .
-
-# Run with docker-compose
-docker-compose up -d
-# 9 Usage BOT
+# 8 Usage BOT
 Bot Commands:
 
 1. Start bot: /start
